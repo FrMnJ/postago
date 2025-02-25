@@ -10,3 +10,5 @@ mail:
   server:
     domain: smtp.gmail.com
     port: 587
+queue: 
+  name: example
