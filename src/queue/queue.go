@@ -49,6 +49,7 @@ func (mq *MailQueue) MainLoop() {
 	emailService := email.NewGmailEmailServiceAdapter()
 	for {
 		info, err := mq.RedisClient.LPop(ctx, config.AppConfig.QueueName).Result()
+		log.Println("Info:", info)
 		if err == redis.Nil {
 			log.Println("Queue is empty, waiting for 1 minute...")
 			time.Sleep(1 * time.Minute)
@@ -66,6 +67,11 @@ func (mq *MailQueue) MainLoop() {
 			time.Sleep(15 * time.Second)
 			continue
 		}
+
+		log.Println("Sending email to:", infoMap["toEmail"])
+		log.Println("Subject:", infoMap["subject"])
+		log.Println("Template:", infoMap["templateName"])
+		log.Println("Data:", infoMap["data"])
 
 		if err := emailService.SendEmail(
 			infoMap["toEmail"].(string),
