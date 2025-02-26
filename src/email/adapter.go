@@ -95,8 +95,7 @@ func NewTemplate(
 	t, err := template.ParseFiles(
 		path.Join(
 			config.GetBaseProjectPath(),
-			"internal",
-			"external",
+			"src",
 			"email",
 			"templates",
 			"template.html",
@@ -109,7 +108,6 @@ func NewTemplate(
 		path.Join(
 			config.GetBaseProjectPath(),
 			"src",
-			"queue",
 			"email",
 			"templates",
 			templateName,
